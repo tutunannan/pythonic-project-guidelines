@@ -1,0 +1,2714 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.7">
+    
+    
+      
+        <title>语言规范 - Python 项目工程化指南</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.cb6bc1d0.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.39b8e14a.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#python" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="../.." title="Python 项目工程化指南" class="md-header-nav__button md-logo" aria-label="Python 项目工程化指南">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            Python 项目工程化指南
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              语言规范
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/pyloong/pythonic-project-guidelines/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pyloong/pythonic-project-guidelines
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Python 项目工程化指南" class="md-nav__button md-logo" aria-label="Python 项目工程化指南">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Python 项目工程化指南
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/pyloong/pythonic-project-guidelines/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    pyloong/pythonic-project-guidelines
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Python 指南
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quick_start/" class="md-nav__link">
+        快速上手
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
+      
+      <label class="md-nav__link" for="nav-3">
+        入门
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="入门" data-md-level="1">
+        <label class="md-nav__title" for="nav-3">
+          <span class="md-nav__icon md-icon"></span>
+          入门
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction/virtualenv/" class="md-nav__link">
+        虚拟环境
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+      
+      <label class="md-nav__link" for="nav-4">
+        项目工程化
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="项目工程化" data-md-level="1">
+        <label class="md-nav__title" for="nav-4">
+          <span class="md-nav__icon md-icon"></span>
+          项目工程化
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          语言规范
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        语言规范
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-lint" class="md-nav__link">
+    1.1 Lint
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 Lint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111" class="md-nav__link">
+    1.1.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112" class="md-nav__link">
+    1.1.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113" class="md-nav__link">
+    1.1.3 缺点
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-import" class="md-nav__link">
+    1.2 Import
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 Import">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    1.2.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" class="md-nav__link">
+    1.2.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123" class="md-nav__link">
+    1.2.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124" class="md-nav__link">
+    1.2.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    1.3 包
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 包">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131" class="md-nav__link">
+    1.3.1 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132" class="md-nav__link">
+    1.3.2 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133" class="md-nav__link">
+    1.3.3 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    1.4 异常
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 异常">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141" class="md-nav__link">
+    1.4.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#141_1" class="md-nav__link">
+    1.4.1 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142" class="md-nav__link">
+    1.4.2 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144" class="md-nav__link">
+    1.4.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    1.5 全局变量
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5 全局变量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151" class="md-nav__link">
+    1.5.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152" class="md-nav__link">
+    1.5.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153" class="md-nav__link">
+    1.5.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#154" class="md-nav__link">
+    1.5.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    1.6 嵌套/局部/内部类和函数
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6 嵌套/局部/内部类和函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161" class="md-nav__link">
+    1.6.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162" class="md-nav__link">
+    1.6.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163" class="md-nav__link">
+    1.6.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#164" class="md-nav__link">
+    1.6.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" class="md-nav__link">
+    1.7 推导式和生成表达式
+  </a>
+  
+    <nav class="md-nav" aria-label="1.7 推导式和生成表达式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171" class="md-nav__link">
+    1.7.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172" class="md-nav__link">
+    1.7.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173" class="md-nav__link">
+    1.7.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#174" class="md-nav__link">
+    1.7.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    1.8 默认迭代器和操作符
+  </a>
+  
+    <nav class="md-nav" aria-label="1.8 默认迭代器和操作符">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#181" class="md-nav__link">
+    1.8.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#182" class="md-nav__link">
+    1.8.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#183" class="md-nav__link">
+    1.8.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#184" class="md-nav__link">
+    1.8.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    1.9 生成器
+  </a>
+  
+    <nav class="md-nav" aria-label="1.9 生成器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#191" class="md-nav__link">
+    1.9.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#192" class="md-nav__link">
+    1.9.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#193" class="md-nav__link">
+    1.9.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#194" class="md-nav__link">
+    1.9.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#110-lambda" class="md-nav__link">
+    1.10 Lambda 函数
+  </a>
+  
+    <nav class="md-nav" aria-label="1.10 Lambda 函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1101" class="md-nav__link">
+    1.10.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1102" class="md-nav__link">
+    1.10.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1103" class="md-nav__link">
+    1.10.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1104" class="md-nav__link">
+    1.10.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#111_1" class="md-nav__link">
+    1.11 条件表达式
+  </a>
+  
+    <nav class="md-nav" aria-label="1.11 条件表达式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1111" class="md-nav__link">
+    1.11.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1112" class="md-nav__link">
+    1.11.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1112_1" class="md-nav__link">
+    1.11.2 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1114" class="md-nav__link">
+    1.11.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112_1" class="md-nav__link">
+    1.12 默认参数值
+  </a>
+  
+    <nav class="md-nav" aria-label="1.12 默认参数值">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1121" class="md-nav__link">
+    1.12.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1122" class="md-nav__link">
+    1.12.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1123" class="md-nav__link">
+    1.12.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#113_1" class="md-nav__link">
+    1.13 属性
+  </a>
+  
+    <nav class="md-nav" aria-label="1.13 属性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1131" class="md-nav__link">
+    1.13.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1132" class="md-nav__link">
+    1.13.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1133" class="md-nav__link">
+    1.13.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1134" class="md-nav__link">
+    1.13.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#114-true-false" class="md-nav__link">
+    1.14 True / False 判断
+  </a>
+  
+    <nav class="md-nav" aria-label="1.14 True / False 判断">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1141" class="md-nav__link">
+    1.14.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1142" class="md-nav__link">
+    1.14.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1143" class="md-nav__link">
+    1.14.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1144" class="md-nav__link">
+    1.14.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#115" class="md-nav__link">
+    1.15 不推荐的语言特性
+  </a>
+  
+    <nav class="md-nav" aria-label="1.15 不推荐的语言特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1151" class="md-nav__link">
+    1.15.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1152" class="md-nav__link">
+    1.15.2 优点
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#116" class="md-nav__link">
+    1.16 作用域
+  </a>
+  
+    <nav class="md-nav" aria-label="1.16 作用域">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1162" class="md-nav__link">
+    1.16.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2163" class="md-nav__link">
+    2.16.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1164" class="md-nav__link">
+    1.16.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#117" class="md-nav__link">
+    1.17 函数和函数装饰去
+  </a>
+  
+    <nav class="md-nav" aria-label="1.17 函数和函数装饰去">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1171" class="md-nav__link">
+    1.17.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1172" class="md-nav__link">
+    1.17.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1173" class="md-nav__link">
+    1.17.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1174" class="md-nav__link">
+    1.17.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#118" class="md-nav__link">
+    1.18 线程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#119" class="md-nav__link">
+    1.19 强大的特性
+  </a>
+  
+    <nav class="md-nav" aria-label="1.19 强大的特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1191" class="md-nav__link">
+    1.19.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1192" class="md-nav__link">
+    1.19.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1193" class="md-nav__link">
+    1.19.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1194" class="md-nav__link">
+    1.19.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#120-python-python3-__future__" class="md-nav__link">
+    1.20 新版 Python ： Python3 和 __future__
+  </a>
+  
+    <nav class="md-nav" aria-label="1.20 新版 Python ： Python3 和 __future__">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1201" class="md-nav__link">
+    1.20.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1202" class="md-nav__link">
+    1.20.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1203" class="md-nav__link">
+    1.20.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1204" class="md-nav__link">
+    1.20.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#121_1" class="md-nav__link">
+    1.21 代码类型标注
+  </a>
+  
+    <nav class="md-nav" aria-label="1.21 代码类型标注">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1211" class="md-nav__link">
+    1.21.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1212" class="md-nav__link">
+    1.21.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1213" class="md-nav__link">
+    1.21.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1314" class="md-nav__link">
+    1.31.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../style_rules/" class="md-nav__link">
+        风格规范
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" >
+      
+      <label class="md-nav__link" for="nav-5">
+        项目实践
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="项目实践" data-md-level="1">
+        <label class="md-nav__title" for="nav-5">
+          <span class="md-nav__icon md-icon"></span>
+          项目实践
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../pratice/web/" class="md-nav__link">
+        Web
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#11-lint" class="md-nav__link">
+    1.1 Lint
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 Lint">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111" class="md-nav__link">
+    1.1.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112" class="md-nav__link">
+    1.1.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113" class="md-nav__link">
+    1.1.3 缺点
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-import" class="md-nav__link">
+    1.2 Import
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 Import">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121" class="md-nav__link">
+    1.2.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122" class="md-nav__link">
+    1.2.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123" class="md-nav__link">
+    1.2.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#124" class="md-nav__link">
+    1.2.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    1.3 包
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 包">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131" class="md-nav__link">
+    1.3.1 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132" class="md-nav__link">
+    1.3.2 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133" class="md-nav__link">
+    1.3.3 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    1.4 异常
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 异常">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141" class="md-nav__link">
+    1.4.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#141_1" class="md-nav__link">
+    1.4.1 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142" class="md-nav__link">
+    1.4.2 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#144" class="md-nav__link">
+    1.4.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15" class="md-nav__link">
+    1.5 全局变量
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5 全局变量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151" class="md-nav__link">
+    1.5.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152" class="md-nav__link">
+    1.5.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153" class="md-nav__link">
+    1.5.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#154" class="md-nav__link">
+    1.5.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16" class="md-nav__link">
+    1.6 嵌套/局部/内部类和函数
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6 嵌套/局部/内部类和函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161" class="md-nav__link">
+    1.6.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162" class="md-nav__link">
+    1.6.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163" class="md-nav__link">
+    1.6.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#164" class="md-nav__link">
+    1.6.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17" class="md-nav__link">
+    1.7 推导式和生成表达式
+  </a>
+  
+    <nav class="md-nav" aria-label="1.7 推导式和生成表达式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171" class="md-nav__link">
+    1.7.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172" class="md-nav__link">
+    1.7.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173" class="md-nav__link">
+    1.7.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#174" class="md-nav__link">
+    1.7.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18" class="md-nav__link">
+    1.8 默认迭代器和操作符
+  </a>
+  
+    <nav class="md-nav" aria-label="1.8 默认迭代器和操作符">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#181" class="md-nav__link">
+    1.8.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#182" class="md-nav__link">
+    1.8.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#183" class="md-nav__link">
+    1.8.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#184" class="md-nav__link">
+    1.8.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19" class="md-nav__link">
+    1.9 生成器
+  </a>
+  
+    <nav class="md-nav" aria-label="1.9 生成器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#191" class="md-nav__link">
+    1.9.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#192" class="md-nav__link">
+    1.9.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#193" class="md-nav__link">
+    1.9.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#194" class="md-nav__link">
+    1.9.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#110-lambda" class="md-nav__link">
+    1.10 Lambda 函数
+  </a>
+  
+    <nav class="md-nav" aria-label="1.10 Lambda 函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1101" class="md-nav__link">
+    1.10.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1102" class="md-nav__link">
+    1.10.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1103" class="md-nav__link">
+    1.10.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1104" class="md-nav__link">
+    1.10.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#111_1" class="md-nav__link">
+    1.11 条件表达式
+  </a>
+  
+    <nav class="md-nav" aria-label="1.11 条件表达式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1111" class="md-nav__link">
+    1.11.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1112" class="md-nav__link">
+    1.11.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1112_1" class="md-nav__link">
+    1.11.2 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1114" class="md-nav__link">
+    1.11.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112_1" class="md-nav__link">
+    1.12 默认参数值
+  </a>
+  
+    <nav class="md-nav" aria-label="1.12 默认参数值">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1121" class="md-nav__link">
+    1.12.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1122" class="md-nav__link">
+    1.12.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1123" class="md-nav__link">
+    1.12.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#113_1" class="md-nav__link">
+    1.13 属性
+  </a>
+  
+    <nav class="md-nav" aria-label="1.13 属性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1131" class="md-nav__link">
+    1.13.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1132" class="md-nav__link">
+    1.13.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1133" class="md-nav__link">
+    1.13.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1134" class="md-nav__link">
+    1.13.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#114-true-false" class="md-nav__link">
+    1.14 True / False 判断
+  </a>
+  
+    <nav class="md-nav" aria-label="1.14 True / False 判断">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1141" class="md-nav__link">
+    1.14.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1142" class="md-nav__link">
+    1.14.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1143" class="md-nav__link">
+    1.14.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1144" class="md-nav__link">
+    1.14.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#115" class="md-nav__link">
+    1.15 不推荐的语言特性
+  </a>
+  
+    <nav class="md-nav" aria-label="1.15 不推荐的语言特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1151" class="md-nav__link">
+    1.15.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1152" class="md-nav__link">
+    1.15.2 优点
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#116" class="md-nav__link">
+    1.16 作用域
+  </a>
+  
+    <nav class="md-nav" aria-label="1.16 作用域">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1162" class="md-nav__link">
+    1.16.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2163" class="md-nav__link">
+    2.16.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1164" class="md-nav__link">
+    1.16.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#117" class="md-nav__link">
+    1.17 函数和函数装饰去
+  </a>
+  
+    <nav class="md-nav" aria-label="1.17 函数和函数装饰去">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1171" class="md-nav__link">
+    1.17.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1172" class="md-nav__link">
+    1.17.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1173" class="md-nav__link">
+    1.17.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1174" class="md-nav__link">
+    1.17.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#118" class="md-nav__link">
+    1.18 线程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#119" class="md-nav__link">
+    1.19 强大的特性
+  </a>
+  
+    <nav class="md-nav" aria-label="1.19 强大的特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1191" class="md-nav__link">
+    1.19.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1192" class="md-nav__link">
+    1.19.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1193" class="md-nav__link">
+    1.19.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1194" class="md-nav__link">
+    1.19.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#120-python-python3-__future__" class="md-nav__link">
+    1.20 新版 Python ： Python3 和 __future__
+  </a>
+  
+    <nav class="md-nav" aria-label="1.20 新版 Python ： Python3 和 __future__">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1201" class="md-nav__link">
+    1.20.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1202" class="md-nav__link">
+    1.20.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1203" class="md-nav__link">
+    1.20.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1204" class="md-nav__link">
+    1.20.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#121_1" class="md-nav__link">
+    1.21 代码类型标注
+  </a>
+  
+    <nav class="md-nav" aria-label="1.21 代码类型标注">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1211" class="md-nav__link">
+    1.21.1 定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1212" class="md-nav__link">
+    1.21.2 优点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1213" class="md-nav__link">
+    1.21.3 缺点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1314" class="md-nav__link">
+    1.31.4 决定
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/pyloong/pythonic-project-guidelines/edit/master/docs/guidelines/language_rules.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <!-- markdownlint-disable MD046 MD038 -->
+
+<h1 id="python">Python 语言规范</h1>
+<blockquote>
+<p>本文档为 <a href="https://google.github.io/styleguide/pyguide.html">Google Python Style Guide</a> 中 第二章 <a href="https://google.github.io/styleguide/pyguide.html#2-python-language-rules">Python Language Rules</a> 的译文。</p>
+<p>最后更新时间： 2020-12-09 16:37:00</p>
+<p>如有翻译错误或不准确等任何问题，欢迎提交 PR 。谢谢你。</p>
+</blockquote>
+<h2 id="11-lint">1.1 Lint</h2>
+<p>使用 <a href="https://google.github.io/styleguide/pylintrc">pylintrc</a> 配置，运行 <code>pylint</code> 来检测代码。</p>
+<h3 id="111">1.1.1 定义</h3>
+<p>Pylint 是一个在 Python 源代码中查找 bug 和风格问题的工具。它可以发现一些通常由编译器捕获的问题，这些问题通常是针对 C 和 C++ 等动态程度较低的语言的。由于Python的动态特性，一些警告可能是不正确的；然而，虚假的警告应该很少出现。</p>
+<h3 id="112">1.1.2 优点</h3>
+<p>可以发现经常忽视的错误。例如拼写错误，使用在声明前使用变量，等等。</p>
+<h3 id="113">1.1.3 缺点</h3>
+<p><code>pylint</code> 并不是很完美。要使用它，有时需要：</p>
+<ol>
+<li>围绕它写</li>
+<li>禁用警告</li>
+<li>改进它</li>
+</ol>
+<p>2.1.4 决定</p>
+<p>确保在代码上运行 <code>pylint</code></p>
+<p>如果警告不准确，需要禁用，以免出现其他问题。若要禁止警告，可以设置行级注释：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">dict</span> <span class="o">=</span> <span class="s1">&#39;something awful&#39;</span>  <span class="c1"># Bad idea... pylint: disable=redefined-builtin</span>
+</code></pre></div>
+<p><code>pylint</code> 警告都是符号名称 (empty-docstring) 标识的， Google 规范的警告是以 <code>g-</code> 开头的。</p>
+<p>如果从符号名称中看不出禁用的原因，请添加说明。这样做的好处是可以很容易的搜索并重新查看。</p>
+<p>要获取警告列表可以执行：</p>
+<div class="highlight"><pre><span></span><code>pylint --list-msgs
+</code></pre></div>
+<p>要获取特定信息的详情，可以执行：</p>
+<div class="highlight"><pre><span></span><code>pylint --help-msg<span class="o">=</span>C6409
+</code></pre></div>
+<p>推荐使用 <code>pylint: disable</code> 而不是过时的 <code>pylint: disable-msg</code> 。</p>
+<p>可以通过删除函数开头的变量来禁用 “未使用参数” 警告。并使用注释解释为什么删除。注释 "Unused" 就行了。例如：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">viking_cafe_order</span><span class="p">(</span><span class="n">spam</span><span class="p">,</span> <span class="n">beans</span><span class="p">,</span> <span class="n">eggs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">del</span> <span class="n">beans</span><span class="p">,</span> <span class="n">eggs</span>  <span class="c1"># Unused by vikings.</span>
+    <span class="k">return</span> <span class="n">spam</span> <span class="o">+</span> <span class="n">spam</span> <span class="o">+</span> <span class="n">spam</span>
+</code></pre></div>
+<p>禁用这种警告的其他常见形态有：</p>
+<ul>
+<li>使用 <code>_</code> 作为未使用参数的标识符</li>
+<li>使用 <code>unused_</code> 作为参数名的前缀</li>
+<li>将它们分配给 <code>_</code></li>
+</ul>
+<p>上述的这些形式是允许的，但不再推荐。中断调用器按名称传递参数并且不强制，参数实际上并没有使用。</p>
+<h2 id="12-import">1.2 Import</h2>
+<p>只对包和模块使用导入，不对单个类或函数使用导入。注意： <code>typing</code> 模块是特例。</p>
+<h3 id="121">1.2.1 定义</h3>
+<p>用于将代码从一个模块共享到另一个模块的可重用机制。</p>
+<h3 id="122">1.2.2 优点</h3>
+<ul>
+<li>名称空间管理约定很简单。</li>
+<li>每个标识符的源以一致的方式表示： <code>x.Obj</code> 表示对象 <code>Obj</code> 是在模块 <code>x</code> 中定义的。</li>
+</ul>
+<h3 id="123">1.2.3 缺点</h3>
+<ul>
+<li>模块名称仍然可能发生冲突。</li>
+<li>有些模块名称太长。</li>
+</ul>
+<h3 id="124">1.2.4 决定</h3>
+<ul>
+<li>使用 <code>import x</code> 用于导入包和模块。</li>
+<li>使用 <code>from x import y</code> 从包的前缀 <code>x</code> 中导入没有前缀的 <code>y</code> 模块。</li>
+<li>使用 <code>from x import y as z</code> 导入重名模块，或者这个模块名字很长。</li>
+<li>只有 <code>z</code> 是一个标准缩写时使用 <code>import y as z</code> 导入。例如 <code>np</code> 表示 <code>numpy</code> 。</li>
+</ul>
+<p>例如，模块<code>sound.effects.echo</code> 可以这么导入：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">sound.effects</span> <span class="kn">import</span> <span class="n">echo</span>
+<span class="o">...</span>
+<span class="n">echo</span><span class="o">.</span><span class="n">EchoFilter</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">atten</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div>
+<p>不要在导入中使用相对名称。即使模块在同一个包中，也要使用完整的包名。这有助于防止无意中导入两次。</p>
+<p>从 <code>typing</code> 模块和 <code>six.moves</code> 模块导入不受侧规则约束。</p>
+<h2 id="13">1.3 包</h2>
+<p>使用模块的完整路径名位置导入每个模块。</p>
+<h3 id="131">1.3.1 优点</h3>
+<p>避免模块名称冲突或由于模块搜索路径不符合作者的期望而导致不正确的导入。还可以更快速的找到模块。</p>
+<h3 id="132">1.3.2 缺点</h3>
+<p>因为必须复制包层次结构，所以部署代码更困。但当前的部署机制并没有什么问题。</p>
+<h3 id="133">1.3.3 决定</h3>
+<p>所有新代码都应该导入每个模块的完整包名。</p>
+<p>例如：</p>
+<details class="success" open="open"><summary>推荐</summary><div class="highlight"><pre><span></span><code><span class="c1"># Reference absl.flags in code with the complete name (verbose).</span>
+<span class="kn">import</span> <span class="nn">absl.flags</span>
+<span class="kn">from</span> <span class="nn">doctor.who</span> <span class="kn">import</span> <span class="n">jodie</span>
+
+<span class="n">FLAGS</span> <span class="o">=</span> <span class="n">absl</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">FLAGS</span>
+</code></pre></div>
+</details>
+<details class="warning" open="open"><summary>不推荐</summary><div class="highlight"><pre><span></span><code><span class="c1"># Reference flags in code with just the module name (common).</span>
+<span class="kn">from</span> <span class="nn">absl</span> <span class="kn">import</span> <span class="n">flags</span>
+<span class="kn">from</span> <span class="nn">doctor.who</span> <span class="kn">import</span> <span class="n">jodie</span>
+
+<span class="n">FLAGS</span> <span class="o">=</span> <span class="n">flags</span><span class="o">.</span><span class="n">FLAGS</span>
+</code></pre></div>
+</details>
+<details class="warning" open="open"><summary>不推荐 ( 假设 <code>jodie.py</code> 文件在 <code>doctor/who/where</code> 中 )</summary><div class="highlight"><pre><span></span><code><span class="c1"># 不清楚坐着需要导入哪个模块，什么将被导入。</span>
+<span class="c1"># 实际上导入行为取决于 sys.patch 控制的外部因素。</span>
+<span class="c1"># 作者打算的导入哪个模块的 jodie 呢？</span>
+<span class="kn">import</span> <span class="nn">jodie</span>
+</code></pre></div>
+</details>
+<p>尽管某些环境中会发生这种情况，但不应假定二进制文件在 <code>sys.path</code> 中。这种情况下，代码应该假设 <code>import jodie</code> 指的是名为 <code>jodie</code> 的第三方包或者顶级包，而不是本地的 <code>jodie.py</code> 文件。</p>
+<h2 id="14">1.4 异常</h2>
+<p>异常是允许的，但必须谨慎使用。</p>
+<h3 id="141">1.4.1 定义</h3>
+<p>异常是一种打破常规的代码块控制流以处理错误或其他特殊情况的方法。</p>
+<h3 id="141_1">1.4.1 优点</h3>
+<p>正常操作代码的控制流不会受错误处理代码的干扰。它还允许控制流在出现某种情况时跳过多个逻辑。例如，在一个步骤中从 N 个嵌套函数返回，而不必执行错误代码。</p>
+<h3 id="142">1.4.2 缺点</h3>
+<p>可能导致控制流混乱。在进行库调用时容易遗漏错误案例。</p>
+<h3 id="144">1.4.4 决定</h3>
+<p>异常必须遵循某些条件：</p>
+<ul>
+<li>
+<p>合理使用内置异常。例如，抛出一个 <code>ValureError</code> 指示编程错误。比如违反了前置条件（需要一个正数，但传递了一个负数）。不要使用 <code>assert</code> 语句验证公共 API 的参数值。
+  <code>assert</code> 用于确保内部正确性，不得强制使用，也不表示发生了某些意外事件。如果在后一种情况下需要使用异常，请使用 raise 语句。例如：</p>
+<details class="success" open="open"><summary>推荐</summary><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">connect_to_next_port</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minimum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Connects to the next available port.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        minimum: A port value greater or equal to 1024.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The new minimum port.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ConnectionError: If no available port is found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">minimum</span> <span class="o">&lt;</span> <span class="mi">1024</span><span class="p">:</span>
+        <span class="c1"># Note that this raising of ValueError is not mentioned in the doc</span>
+        <span class="c1"># string&#39;s &quot;Raises:&quot; section because it is not appropriate to</span>
+        <span class="c1"># guarantee this specific behavioral reaction to API misuse.</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Min. port must be at least 1024, not </span><span class="si">{</span><span class="n">minimum</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_next_open_port</span><span class="p">(</span><span class="n">minimum</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">port</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Could not connect to service on port </span><span class="si">{</span><span class="n">minimum</span><span class="si">}</span><span class="s1"> or higher.&#39;</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">port</span> <span class="o">&gt;=</span> <span class="n">minimum</span><span class="p">,</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;Unexpected port </span><span class="si">{</span><span class="n">port</span><span class="si">}</span><span class="s1"> when minimum was </span><span class="si">{</span><span class="n">minimum</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">port</span>
+</code></pre></div>
+</details>
+<details class="warning" open="open"><summary>不推荐</summary><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">connect_to_next_port</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minimum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Connects to the next available port.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        minimum: A port value greater or equal to 1024.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The new minimum port.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">minimum</span> <span class="o">&gt;=</span> <span class="mi">1024</span><span class="p">,</span> <span class="s1">&#39;Minimum port must be at least 1024.&#39;</span>
+    <span class="n">port</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_next_open_port</span><span class="p">(</span><span class="n">minimum</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">port</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">port</span>
+</code></pre></div>
+</details>
+</li>
+<li>
+<p>库和包可以定义它们的自己的异常。但这些异常必须从现有的异常类继承。异常名应该以 <code>Error</code> 结尾，而且避免读起来结巴（<code>foo.FooError</code>）。</p>
+</li>
+<li>禁止捕获所有异常 <code>expect:</code> 语句，或者捕获 <code>Exception</code> 、 <code>StandardError</code> 。Pyhon 在这方面非常宽松， <code>expect:</code> 可以捕获所有拼写错误的名称、 <code>sys.exit()</code> 调用、 <code>Ctrl+C</code> 中断、单元测试失败以及其他各种您根本不想捕获的异常。
+    除非：<ul>
+<li>重新抛出异常，或者</li>
+<li>在程序中创建一个隔离点，在这个隔离点中，异常不会被传播而是被记录或者消除。例如通过保护外部模块来保护线程不崩溃。</li>
+</ul>
+</li>
+<li>减少 <code>try/except</code> 块中的代码量。 <code>try</code> 的作用域越大，这部分代码快中引发代码异常的可能性就越大，而 <code>try/except</code> 就可能隐藏一个错误。</li>
+<li>无论 <code>try</code> 块中是否引发异常，都可以使用 <code>finally</code> 子句执行代码。这对于清理（例如关闭文件）通常很有用。</li>
+</ul>
+<h2 id="15">1.5 全局变量</h2>
+<p>避免使用全局变量</p>
+<h3 id="151">1.5.1 定义</h3>
+<p>在模块级别或作为类属性声明的变量</p>
+<h3 id="152">1.5.2 优点</h3>
+<p>偶尔有用</p>
+<h3 id="153">1.5.3 缺点</h3>
+<p>有可能在导入期间更改模块行为，因为对全局变量的赋值是在首次导入时完成的。</p>
+<h3 id="154">1.5.4 决定</h3>
+<p>避免全局变量</p>
+<p>虽然模块级常量在技术上是变量，但是允许或鼓励使用。例如： <code>MAX_HOLY_HANDGRENADE_COUNT = 3</code> 。常量必须使用带下划线的全部大写命名。请参阅命名规范。</p>
+<p>如果是模块内部的变量，应在模块级别声明全局变量，并通过在模块名称前加上 <code>_</code> 。外部访问必须通过公共模块级函数完成。请参阅命名规范。</p>
+<h2 id="16">1.6 嵌套/局部/内部类和函数</h2>
+<p>使用嵌套局部类或函数来关闭局部变量是可行的。</p>
+<h3 id="161">1.6.1 定义</h3>
+<p>可以在方法、函数、类的内部定义类。函数可以在方法或函数内部定义。嵌套函数对在封闭范围中定义的变量具有只读访问权限。</p>
+<h3 id="162">1.6.2 优点</h3>
+<p>允许定义仅在非常有限的范围内使用的实用程序类和函数。非常 <a href="https://en.wikipedia.org/wiki/Abstract_data_type">ADT</a>-y 。常用于装饰器。</p>
+<h3 id="163">1.6.3 缺点</h3>
+<ul>
+<li>无法对嵌套类或内部类进行 pickle 。</li>
+<li>不能直接测试嵌套的函数和类。</li>
+<li>嵌套会使你的外部功能变得更长、更难读。</li>
+</ul>
+<h3 id="164">1.6.4 决定</h3>
+<p>可以使用，但有一些限制。避免使用嵌套函数或类，除非要关闭局部值。不要仅仅为了对用户隐藏模块的某个函数而进行嵌套。相反应该在模块级别的名称上加 <code>_</code> 前缀，这样方便测试。</p>
+<h2 id="17">1.7 推导式和生成表达式</h2>
+<p>简单的情况下可以使用。</p>
+<h3 id="171">1.7.1 定义</h3>
+<p><code>List</code> ， <code>Dict</code> ， 和 <code>Set</code> 推导式以及生成器表达式为创建容器类型和迭代器提供了一种简洁而有效的方法。而不需要使用传统的循环 <code>map()</code> 、 <code>filter()</code> 或 <code>lambda</code> 。</p>
+<h3 id="172">1.7.2 优点</h3>
+<p>简单的逻辑比其他字典、列表和集合创建技术更加清晰和简单。因为避免创建列表，所以生成器表达式可以非常高效。</p>
+<h3 id="173">1.7.3 缺点</h3>
+<p>理解困难，生成器表达式很难阅读。</p>
+<h3 id="174">1.7.4 决定</h3>
+<p>简单的情况下可以使用。每个部分必须是一行： mapping 操作、 <code>for</code> 子句 、 filter 操作。不允许使用多个子句或筛选表达式。当逻辑更复杂时，使用循环代替。</p>
+<details class="success" open="open"><summary>推荐</summary><div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">mapping_expr</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">iterable</span> <span class="k">if</span> <span class="n">filter_expr</span><span class="p">]</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">}</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">iterable</span>
+          <span class="k">if</span> <span class="n">a_long_filter_expression</span><span class="p">(</span><span class="n">value</span><span class="p">)]</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">complicated_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+          <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">iterable</span> <span class="k">if</span> <span class="n">predicate</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+
+<span class="n">descriptive_name</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">transform</span><span class="p">({</span><span class="s1">&#39;key&#39;</span><span class="p">:</span> <span class="n">key</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">},</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">generate_iterable</span><span class="p">(</span><span class="n">some_input</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">complicated_condition_is_met</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+
+<span class="k">return</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">complicated_transform</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">long_generator_function</span><span class="p">(</span><span class="n">parameter</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">}</span>
+
+<span class="n">squares_generator</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">unique_names</span> <span class="o">=</span> <span class="p">{</span><span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span> <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">}</span>
+
+<span class="n">eat</span><span class="p">(</span><span class="n">jelly_bean</span> <span class="k">for</span> <span class="n">jelly_bean</span> <span class="ow">in</span> <span class="n">jelly_beans</span>
+    <span class="k">if</span> <span class="n">jelly_bean</span><span class="o">.</span><span class="n">color</span> <span class="o">==</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<details class="warning" open="open"><summary>不推荐</summary><div class="highlight"><pre><span></span><code><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">complicated_transform</span><span class="p">(</span>
+          <span class="n">x</span><span class="p">,</span> <span class="n">some_argument</span><span class="o">=</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+      <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">iterable</span> <span class="k">if</span> <span class="n">predicate</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="p">[(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">]</span>
+
+<span class="k">return</span> <span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span>
+        <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">!=</span> <span class="n">z</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<h2 id="18">1.8 默认迭代器和操作符</h2>
+<p>对支持的类型使用默认迭代器和运算符，如列表、字典和文件。</p>
+<h3 id="181">1.8.1 定义</h3>
+<p>容器类型，如字典和列表，定义默认迭代器和成员操作符（ <code>in</code> 和 <code>not in</code> ）</p>
+<h3 id="182">1.8.2 优点</h3>
+<p>默认的迭代器和运算符简单而高效。它们直接使用，不需要调用额外的方法。使用默认运算符的函数是泛型的。它们可以与支持任何该操作的类型一起使用。</p>
+<h3 id="183">1.8.3 缺点</h3>
+<p>不能通过读取方法名称来判断对象的类型（例如： <code>has_key()</code> 表示一个字典）。这是一个特例。</p>
+<h3 id="184">1.8.4 决定</h3>
+<p>对支持它们的类型使用默认迭代器和运算符，如列表、字典和文件。内置类型也定义了迭代器方法。与返回列表的方法相比，更推荐使用这些方法，但是在对容器进行迭代时不应该对其进行修改。除非特殊情况，否则不要使用 <code>Python 2</code> 特定的迭代方法 <code>dict.iter*()</code> 。</p>
+<details class="success" open="open"><summary>推荐</summary><div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">adict</span><span class="p">:</span> <span class="o">...</span>
+<span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">adict</span><span class="p">:</span> <span class="o">...</span>
+<span class="k">if</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">alist</span><span class="p">:</span> <span class="o">...</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">afile</span><span class="p">:</span> <span class="o">...</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">adict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span> <span class="o">...</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">adict</span><span class="p">):</span> <span class="o">...</span>
+</code></pre></div>
+</details>
+<details class="warning" open="open"><summary>不推荐</summary><div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">adict</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span> <span class="o">...</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">adict</span><span class="o">.</span><span class="n">has_key</span><span class="p">(</span><span class="n">key</span><span class="p">):</span> <span class="o">...</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">afile</span><span class="o">.</span><span class="n">readlines</span><span class="p">():</span> <span class="o">...</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span> <span class="o">...</span>
+</code></pre></div>
+</details>
+<h2 id="19">1.9 生成器</h2>
+<p>根据需要使用生成器。</p>
+<h3 id="191">1.9.1 定义</h3>
+<p>生成器函数返回一个迭代器，该迭代器在每次执行 <code>yield</code> 语句时生成一个值。生成值之后，生成器函数的运行时状态将会暂停，直到需要下一个值为止。</p>
+<h3 id="192">1.9.2 优点</h3>
+<p>更简单的代码，因为每次调用都会保留局部变量和控制流的状态。生成器使用的内存比一次创建整个值列表的函数少。</p>
+<h3 id="193">1.9.3 缺点</h3>
+<p>没有。</p>
+<h3 id="194">1.9.4 决定</h3>
+<p>在生成器函数的文档字符串中使用 <code>Yields</code> 而不是 <code>Returns</code> 。</p>
+<h2 id="110-lambda">1.10 Lambda 函数</h2>
+<p>一行程序的情况时使用。</p>
+<h3 id="1101">1.10.1 定义</h3>
+<p>Lambdas 在表达式中定义匿名函数，而不是在语句中定义。它们通常用于为 <code>map()</code> 和 <code>filter()</code> 等高阶函数定义回调函数或运算符。</p>
+<h3 id="1102">1.10.2 优点</h3>
+<p>方便。</p>
+<h3 id="1103">1.10.3 缺点</h3>
+<p>比本地函数更难阅读和调试。缺少名称意味着堆栈跟踪更难理解。由于函数可能只包含表达式，所以表达性受到限制。</p>
+<h3 id="1104">1.10.4 决定</h3>
+<p>可以让程序变成一行。如果 Lambda 函数中代码长度超过 60-80 个字符，那么最好将其定义为常规嵌套函数。</p>
+<p>对于像乘法这种常见的操作，使用来自操作符模块的函数而不是使用 Lambda 函数。例如：推荐使用 <code>operator.mul</code> 而不是 <code>lambda x, y: x * y</code> 。</p>
+<h2 id="111_1">1.11 条件表达式</h2>
+<p>对于简单情况可以使用</p>
+<h3 id="1111">1.11.1 定义</h3>
+<p>条件表达式（有时称为“三元运算符”）是为 <code>if</code> 语句提供更短语法的机制。例如 <code>x = 1 if cond else 2</code> 。</p>
+<h3 id="1112">1.11.2 优点</h3>
+<p>比 <code>if</code> 语句更短更方便。</p>
+<h3 id="1112_1">1.11.2 缺点</h3>
+<p>可能比 <code>if</code> 语句更难懂。如果表达式很长，可能很难定位。</p>
+<h3 id="1114">1.11.4 决定</h3>
+<p>可以用于简单的情况。每个部分必须放在一行上: <code>true-expression, if-expression, else-expression.</code> 。复杂情况下应使用完整的语句。</p>
+<div class="highlight"><pre><span></span><code><span class="n">one_line</span> <span class="o">=</span> <span class="s1">&#39;yes&#39;</span> <span class="k">if</span> <span class="n">predicate</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;no&#39;</span>
+<span class="n">slightly_split</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;yes&#39;</span> <span class="k">if</span> <span class="n">predicate</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                  <span class="k">else</span> <span class="s1">&#39;no, nein, nyet&#39;</span><span class="p">)</span>
+<span class="n">the_longest_ternary_style_that_can_be_done</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s1">&#39;yes, true, affirmative, confirmed, correct&#39;</span>
+    <span class="k">if</span> <span class="n">predicate</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">else</span> <span class="s1">&#39;no, false, negative, nay&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">bad_line_breaking</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;yes&#39;</span> <span class="k">if</span> <span class="n">predicate</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">else</span>
+                     <span class="s1">&#39;no&#39;</span><span class="p">)</span>
+<span class="n">portion_too_long</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;yes&#39;</span>
+                    <span class="k">if</span> <span class="n">some_long_module</span><span class="o">.</span><span class="n">some_long_predicate_function</span><span class="p">(</span>
+                        <span class="n">really_long_variable_name</span><span class="p">)</span>
+                    <span class="k">else</span> <span class="s1">&#39;no, false, negative, nay&#39;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="112_1">1.12 默认参数值</h2>
+<p>适用大多数情况。</p>
+<h3 id="1121">1.12.1 定义</h3>
+<p>在函数的参数列表的末尾为变量指定值，例如： <code>def(a, b=0):</code> 。如果 <code>foo</code> 只有一个参数，那么 <code>b</code> 被设置为 0 ，如果调用时有两个参数，则 <code>b</code> 的值为第二个参数。</p>
+<h3 id="1122">1.12.2 优点</h3>
+<p>通常会有一个函数使用大量默认值，但在极少数情况下，希望覆盖默认值。默认参数值提供了一种简单的方法来实现这一点，而不是必须为特例定义大量的函数。由于 Python 不支持重载的方法/函数，默认参数是“伪造”重载行为的一种简单方法。</p>
+<h3 id="1123">1.12.3 缺点</h3>
+<p>默认参数在模块加载时一次计算。如果参数是可变对象（比如列表或字典），则可能出现问题。如果函数修改对象（例如：在列表中追加一项），会修改默认值。</p>
+<h3 id="_1">决定</h3>
+<p>不要在函数或方法定义中使用可变对象作为默认值。</p>
+<details class="success" open="open"><summary>推荐</summary><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="p">[]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">b</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="p">[]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Sequence</span> <span class="o">=</span> <span class="p">()):</span>  <span class="c1"># Empty tuple OK since tuples are immutable</span>
+    <span class="o">...</span>
+</code></pre></div>
+</details>
+<details class="warning" open="open"><summary>不推荐</summary><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="p">[]):</span>
+     <span class="o">...</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()):</span>  <span class="c1"># The time the module was loaded???</span>
+     <span class="o">...</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">FLAGS</span><span class="o">.</span><span class="n">my_thing</span><span class="p">):</span>  <span class="c1"># sys.argv has not yet been parsed...</span>
+     <span class="o">...</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">Mapping</span> <span class="o">=</span> <span class="p">{}):</span>  <span class="c1"># Could still get passed to unchecked code</span>
+     <span class="o">...</span>
+</code></pre></div>
+</details>
+<h2 id="113_1">1.13 属性</h2>
+<p>在通常使用简单，轻量级的访问器或设置器方法的地方，使用属性访问或设置数据。</p>
+<h3 id="1131">1.13.1 定义</h3>
+<p>是一种包装方法，一个轻量的方式是将获取和设置一个属性作为标准属性访问。</p>
+<h3 id="1132">1.13.2 优点</h3>
+<p>不用显式调用 <code>get</code> 和 <code>set</code> 方法操作数据，可读性变得提高。允许懒加载。认为是 Pythonic 维护类接口的方法。在性能方面，当允许直接访问变量时，不用调用访问方法。这也允许将来在不破坏接口的情况加添加访问器方法。</p>
+<h3 id="1133">1.13.3 缺点</h3>
+<ul>
+<li>在 Python 2 中，必须从 <code>object</code> 继承</li>
+<li>运算符可能被重载。</li>
+<li>子类变得难以理解</li>
+</ul>
+<h3 id="1134">1.13.4 决定</h3>
+<p>使用新代码中的属性来访问或设置数据，而通常情况下，这些属性本可以使用简单，轻量级的访问器或设置器方法。使用 <code>@property</code> 创建属性。</p>
+<p>如果不重写属性本身，则对属性的继承可能不太好做。因此必须确保间接调用访问器方法，以确保属性（使用<a href="https://en.wikipedia.org/wiki/Template_method_pattern">模板方法设计模式</a>）调用子类中重写的方法。</p>
+<details class="success" open="open"><summary>推荐</summary><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="k">class</span> <span class="nc">Square</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A square with two properties: a writable area and a read-only perimeter.</span>
+
+<span class="sd">    To use:</span>
+<span class="sd">    &gt;&gt;&gt; sq = Square(3)</span>
+<span class="sd">    &gt;&gt;&gt; sq.area</span>
+<span class="sd">    9</span>
+<span class="sd">    &gt;&gt;&gt; sq.perimeter</span>
+<span class="sd">    12</span>
+<span class="sd">    &gt;&gt;&gt; sq.area = 16</span>
+<span class="sd">    &gt;&gt;&gt; sq.side</span>
+<span class="sd">    4</span>
+<span class="sd">    &gt;&gt;&gt; sq.perimeter</span>
+<span class="sd">    16</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">side</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">=</span> <span class="n">side</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Area of the square.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_area</span><span class="p">()</span>
+
+    <span class="nd">@area</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_area</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Indirect accessor to calculate the &#39;area&#39; property.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">**</span> <span class="mi">2</span>
+
+    <span class="k">def</span> <span class="nf">_set_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Indirect setter to set the &#39;area&#39; property.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">perimeter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">side</span> <span class="o">*</span> <span class="mi">4</span>
+</code></pre></div>
+</details>
+<h2 id="114-true-false">1.14 <code>True</code> / <code>False</code> 判断</h2>
+<p>尽可能使用“隐式” <code>False</code> 。</p>
+<h3 id="1141">1.14.1 定义</h3>
+<p>Python 在布尔上下文中将某些值计算为 <code>False</code> 。一个快速的“规律”是，所有“空”值都被认为是 <code>False</code> 。因此在布尔上下文中 <code>0</code> ， <code>None</code> ， <code>[]</code> ， <code>{}</code> ， <code>''</code> 都被计算为 <code>False</code> 。</p>
+<h3 id="1142">1.14.2 优点</h3>
+<p>使用 Python 布尔运算的条件更容易阅读，更不容易出错。</p>
+<h3 id="1143">1.14.3 缺点</h3>
+<p>C/C++ 开发人员看起来很怪。</p>
+<h3 id="1144">1.14.4 决定</h3>
+<p>如果可能的话使用“隐式” <code>False</code> ，例如： <code>if foo:</code> 而不是 <code>if foo != []:</code> 。不过，有几点需要注意：</p>
+<ul>
+<li>必须使用 <code>if foo is None:</code> 或 <code>if foo is not None:</code> 来检查 <code>None</code> 值。例如：在测试默认为 <code>None</code> 的变量或参数是否被设置为其他值时。另一个值可能在布尔上下文中为 <code>False</code> 值！</li>
+<li>千万不要使用 <code>==</code> 来比较布尔变量和 <code>Flase</code> 。使用 <code>if not x:</code> 替代。如果需要区分 <code>False</code> 和 <code>None</code> ，那么将表达式连接起来，比如： <code>if not x and x is not None:</code> 。</li>
+<li>对于序列（字符串、列表、元组）， 空序列就是 <code>False</code> 。因此： <code>if seq:</code> 和 <code>if not seq:</code> 比 <code>if len(seq):</code> 和 <code>if not len(seq)</code> 要更好。</li>
+<li>
+<p>当处理整数时，隐式 <code>False</code> 可能会出现更多的问题（例如：意外的将 <code>None</code> 处理为 0 ）。可以将已知为整数的值（不是 <code>len()</code> 的结果）与整数 0 进行比较。</p>
+<details class="success" open="open"><summary>推荐</summary><div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="ow">not</span> <span class="n">users</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no users&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">foo</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">handle_zero</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">handle_multiple_of_ten</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
+</code></pre></div>
+</details>
+<details class="warning" open="open"><summary>不推荐</summary><div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">users</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;no users&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">foo</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">foo</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">handle_zero</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">handle_multiple_of_ten</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="ow">or</span> <span class="p">[]</span>
+</code></pre></div>
+</details>
+</li>
+<li>
+<p>注意： <code>'0'</code> （即： <code>0</code> 作为字符串）的计算结果是 <code>True</code> 。</p>
+</li>
+</ul>
+<h2 id="115">1.15 不推荐的语言特性</h2>
+<ul>
+<li>尽可能使用字符串方法代替 <code>string</code> 模块。</li>
+<li>使用函数调用语法替代 <code>apply</code> 。</li>
+<li>使用列表推导式和 <code>for</code> 替代 <code>filter</code> 和 <code>map</code> ，因为参数本来就是一个内联的 lambda 。</li>
+<li>使用 <code>for</code> 循环而不是 <code>reduce</code></li>
+</ul>
+<h3 id="1151">1.15.1 定义</h3>
+<p>Python 的当前版本提供了人们通常认为更好的替代构造。</p>
+<h3 id="1152">1.15.2 优点</h3>
+<p>不使用任何不支持这些特性的 Python 版本，因此没理由不适用新的风格。</p>
+<details class="success" open="open"><summary>推荐</summary><div class="highlight"><pre><span></span><code><span class="n">words</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+
+ <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">my_list</span> <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span><span class="p">]</span>
+
+ <span class="nb">map</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>    <span class="c1"># Ok. No inlined lambda expression.</span>
+
+ <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<details class="warning" open="open"><summary>不推荐</summary><div class="highlight"><pre><span></span><code><span class="n">words</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">)</span>
+
+ <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span><span class="p">,</span> <span class="n">my_list</span><span class="p">))</span>
+
+ <span class="n">apply</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<h2 id="116">1.16 作用域</h2>
+<p>嵌套的 Python 函数可以引用封闭函数中定义的变量，但不能为它们赋值。变量绑定使用作用域（即基于静态程序文本）进行解析。对块中某个名称的任何赋值都会导致 Python 对该名称的所有引用视为局部变量，即使在赋值前使用。如果发生全局声明，则将该名称视为全局变量。</p>
+<p>比如这个例子：</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_adder</span><span class="p">(</span><span class="n">summand1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns a function that adds numbers to a given number.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">adder</span><span class="p">(</span><span class="n">summand2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">summand1</span> <span class="o">+</span> <span class="n">summand2</span>
+
+    <span class="k">return</span> <span class="n">adder</span>
+</code></pre></div>
+<h3 id="1162">1.16.2 优点</h3>
+<p>通常会产生更清晰、更优雅的代码。特别适合有经验的 Lisp 和 Scheme （以及 Haskell 和 ML 等）程序员。</p>
+<h3 id="2163">2.16.3 缺点</h3>
+<p>可能导致混乱和 BUG 。比如：基于 PEP-0227 的例子：</p>
+<div class="highlight"><pre><span></span><code><span class="n">i</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">bar</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="c1"># ...</span>
+    <span class="c1"># A bunch of code here</span>
+    <span class="c1"># ...</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>  <span class="c1"># Ah, i *is* local to foo, so this is what bar sees</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">bar</span><span class="p">()</span>
+</code></pre></div>
+<p><code>foo([1, 2, 3])</code> 将打印 <code>1 2 3 3</code> 而不是 <code>1 2 3 4</code></p>
+<h3 id="1164">1.16.4 决定</h3>
+<p>可以使用。</p>
+<h2 id="117">1.17 函数和函数装饰去</h2>
+<p>当有明显优点时，优先使用装饰器。避免使用 <code>staticmethod</code> ，有节制地使用 <code>classmethod</code></p>
+<h3 id="1171">1.17.1 定义</h3>
+<p>函数和方法的装饰器（又名为 <code>@</code> 标注法）。一个常见的装饰器是 <code>@property</code> ，用于将普通方法转换为动态计算的属性。但是装饰器也自定义。具体来说，对于某个函数 <code>my_decorator</code> ，可以这么用：</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">C</span><span class="p">:</span>
+    <span class="nd">@my_decorator</span>
+    <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># method body ...</span>
+</code></pre></div>
+<p>这相当于：</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">C</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># method body ...</span>
+    <span class="n">method</span> <span class="o">=</span> <span class="n">my_decorator</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="1172">1.17.2 优点</h3>
+<p>优雅的指定了方法上的某些转换，转换可以消除一些重复的代码，加强不变量，等等。</p>
+<h3 id="1173">1.17.3 缺点</h3>
+<p>装饰器可以对函数的参数或返回值执行任意操作，从而导致惊人的隐式行为。另外，装饰器在导入时执行。装饰器中的异常几乎不可能修复。</p>
+<h3 id="1174">1.17.4 决定</h3>
+<ul>
+<li>当有明显优势时，优先使用装饰器。</li>
+<li>装饰器应该遵循于函数相同导入和命名规则。</li>
+<li>装饰器文档应清楚的表明该函数是一个装饰器。</li>
+<li>为装饰器编写单元测试。</li>
+</ul>
+<p>避免在装饰器本身中使用外部依赖（例如：不要依赖文件、套接字、数据库连接等），因为装饰器运行时（在导入时出问题， <code>pydoc</code> 问题，或其他工具出现问题）可能不可用。应（尽可能）保证在所有情况下使用有效参数调用装饰器都是正常得。</p>
+<p>装饰器符合“顶级代码”的一种特殊情况——请参阅 main 以了解更多讨论。</p>
+<p>永远不要使用 <code>staticmethod</code> ，除非为了现有库中定义的 API 集成而被迫使用。改为编写模块级函数。</p>
+<p>仅在编写命名构造函数或修改必要的全局状态（如进程范围缓存）的特定类操作时，才使用 <code>classmethod</code> 。</p>
+<h2 id="118">1.18 线程</h2>
+<p>不要依赖内置类型的原子性。</p>
+<p>尽管 Python 的内置类型（如字典）看起来具有原子性，但也有一些不是原子操作（例如： 如果 <code>__hash__</code> 或 <code>__eq__</code> 是作为 Python 方法实现的），而且不应认为是原子操作。也不应该依赖原子变量复制（因为这取决于字典）</p>
+<p>使用 <code>Queue</code> 模块的 <code>Queue</code> 数据类型作为线程之间通信数据的首先方式。要不然就是使用线程模块以及锁原语。推荐使用条件变量和 <code>threading.Condition</code> ，而不是使用底层的锁。</p>
+<h2 id="119">1.19 强大的特性</h2>
+<p>避免使用。</p>
+<h3 id="1191">1.19.1 定义</h3>
+<p>Python 是一种非常灵活的语言，它提供了许多奇特的特性，例如：定制元类、字节码访问、动态编译、动态继承、对象父类重定义、 hack 导入、反射（例如： <code>getatter()</code> 的一些用法）、系统内部修改等。</p>
+<h3 id="1192">1.19.2 优点</h3>
+<p>这些都是强大的语言特性，可以使代码更加紧凑。</p>
+<h3 id="1193">1.19.3 缺点</h3>
+<p>在不是绝对必要的时候，轻易引入这些“酷”的功能，会让代码更难阅读、理解和调试。在开始（对于原始作者来说）并没有什么感觉，但是再次审查代码时，这种代码会更难理解。</p>
+<h3 id="1194">1.19.4 决定</h3>
+<p>在代码中避免使用这些特性。</p>
+<p>内部使用的标准模块和类是可以使用这些特性。（例如： <code>abc.ABCMeta</code> 、 <code>collections.namedtuple</code> 、 <code>dataclasses</code> 、 和 <code>enum</code> ）。</p>
+<h2 id="120-python-python3-__future__">1.20 新版 Python ： Python3 和 <code>__future__</code></h2>
+<p>当前版本就是 Python 3 。虽然不是每个项目都准备使用，但是所有编写的代码都应该兼容 Python 3（如可能的话，在 Python 3 下进行测试）。</p>
+<h3 id="1201">1.20.1 定义</h3>
+<p>Python 3 是 Python 语言中的一个重大变化。虽然现在有的代码通常是 Python 2.7 编写的，但是可以通过一些简单的工作让代码更明确表达出在 Python 3 下不需要更改。</p>
+<h3 id="1202">1.20.2 优点</h3>
+<p>当多有依赖都兼容 Python 3 的时候，就可以直接用 Python 3 编写代码了，也更容易在 Python 3 下运行。</p>
+<h3 id="1203">1.20.3 缺点</h3>
+<ul>
+<li>样板文件不好看。</li>
+<li>导入实际并不需要的特性模块看起来怪怪的。</li>
+</ul>
+<h3 id="1204">1.20.4 决定</h3>
+<p><code>from __future__ imports</code></p>
+<p>推荐使用 <code>from __future__ import</code> 语句。所有新的代码都应包含如下内容，并尽可能更新现有代码以使其兼容</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+</code></pre></div>
+<p>有关这些导入的更多信息，请参阅 <a href="https://www.python.org/dev/peps/pep-0328/">absolute imports</a> 、 <a href="https://google.github.io/styleguide/pyguide.html">division behavior</a>
+ 和 <a href="https://www.python.org/dev/peps/pep-3105/">the print function</a>。</p>
+<p>还有其他 <code>from __future__</code> 语句。在你认为合适的时候使用。推荐中没有包括 <code>unicode_literals</code> ，因为在 Python 2.7 中会在许多地方引入隐式的默认编码转化。大多数代码最好在必要时显示使用 <code>b''</code> 和 <code>u''</code> 字节以及 unicode 字符串文本。</p>
+<p><strong><code>six</code> 、 <code>future</code> 和 <code>past</code> 库</strong></p>
+<p>当项目需要同时支持 Python 2 和 Python 3 时，可以根据自己的需要使用<a href="https://pypi.org/project/six/"><code>six</code></a> 、 <a href="https://pypi.org/project/future/"><code>future</code></a> 、 <a href="https://pypi.org/project/past/"><code>past</code></a> 。这些库的存在是为了让代码更清晰和简单。</p>
+<h2 id="121_1">1.21 代码类型标注</h2>
+<p>在 Python 3 中，可以根据 <a href="https://www.python.org/dev/peps/pep-0484/">PEP-484</a> 使用类型标注，并在构建时使用类型检查工具（如： pytype） 检查代码。</p>
+<p>类型标注可以在原文件中，可以在 <a href="https://www.python.org/dev/peps/pep-0484/#stub-files">pyi 存根</a>文件中。尽可能的将标注放在源代码中。对于第三方或扩展模块使用 pyi 文件。</p>
+<h3 id="1211">1.21.1 定义</h3>
+<p>类型标注（或类型提示）适用于函数或方法参数和返回值。</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+</code></pre></div>
+<p>还可以使用 <a href="https://www.python.org/dev/peps/pep-0526/">PEP-526</a> 语法声明变量类型。</p>
+<div class="highlight"><pre><span></span><code><span class="n">a</span><span class="p">:</span> <span class="n">SomeType</span> <span class="o">=</span> <span class="n">some_func</span><span class="p">()</span>
+</code></pre></div>
+<p>或者对于老版本 Python 必须使用注释类型标注</p>
+<div class="highlight"><pre><span></span><code><span class="n">a</span> <span class="o">=</span> <span class="n">some_func</span><span class="p">()</span>  <span class="c1"># type: SomeType</span>
+</code></pre></div>
+<h3 id="1212">1.21.2 优点</h3>
+<p>类型标注提高了代码的可读性和可维护性。类型检查会在构建时发现许多将会出现在运行时的错误，并减少新特性地使用。</p>
+<h3 id="1213">1.21.3 缺点</h3>
+<ul>
+<li>必须不断更新类型标注。</li>
+<li>本该正确的代码可能出现类型错误。</li>
+<li>类型检查可能会减少使用新特性的使用。</li>
+</ul>
+<h3 id="1314">1.31.4 决定</h3>
+<p>强烈建议在更新代码时启用类型分析。在添加或修改公共 API 时，在构建过程中使用 pytype 检查类型标注。由于静态分析刚兴起，某些项目可能会因为负面效果（例如：类型推断错误）而不使用。在这种情况下，鼓励坐着添加一个带有 TODO 的注释，或者连接到有一个错误，该错误描述了在构建文件或者代码本身使用类型标注出现的问题。</p>
+<!-- markdownlint-restore -->
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../../introduction/virtualenv/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                虚拟环境
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../style_rules/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                风格规范
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.53cc9318.min.js"></script>
+      <script src="../../assets/javascripts/bundle.e9c9f54f.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: ['search.highlight'],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.9c0e82ba.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
